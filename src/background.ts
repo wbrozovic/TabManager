@@ -15,7 +15,7 @@ function sortTabs() {
     let sortedTabList_temp: chrome.tabs.Tab[] = []
     let tabDict = {}
 
-    
+    //comment
 
 }
 
