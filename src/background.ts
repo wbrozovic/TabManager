@@ -15,8 +15,6 @@ interface ITabMap {
 }
 
 
-
-
 const tabMap: ITabMap = {}
 
 async function sortTabs() {
@@ -27,8 +25,11 @@ async function sortTabs() {
     }).then((tabs) => 
         tabs.forEach((tab: chrome.tabs.Tab) => {
             //@ts-ignore
-            let url:string = tab.url?.match('https:\/\/[a-zA-Z0-9]+')[0]
+            let url:string = tab.url?.match('(https:\/\/){1}(www\.)?[a-zA-Z0-9]+')[0]
             
+            url = url.replace('www.', '');
+            url = url.replace('https://', '')
+
             if(tab.id) {
                 if(tabMap[url]) {
                     tabMap[url].push(tab.id)
@@ -40,7 +41,12 @@ async function sortTabs() {
         
     )
     
-    
+    tabMap.map((key:string) => {
+        console.log(key)
+    })
+
+    //const group = await chrome.tabs.group({tabMap})
+    //console.log(group)
 }
 
 
