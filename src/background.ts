@@ -39,7 +39,7 @@ async function sortTabs() {
         ]
     }).then((tabs) => 
         tabs.forEach((tab: chrome.tabs.Tab) => {
-            let urlMatch = tab.url?.match('(https:\/\/){1}(www\.)?[a-zA-Z0-9]+(\.com|\.decisions|\.)');
+            let urlMatch = tab.url?.match('(https:\/\/){1}(www\.)?[a-zA-Z0-9-]+(\.com|\.decisions|\.ryan|\.)');
             //@ts-ignore
             let url:string = urlMatch?.length > 0 ? urlMatch[0] : tab.url;
             console.log(tab)
@@ -82,10 +82,20 @@ async function sortTabs() {
               color: 'orange',
             });
         } 
-        else if (key_lower.includes('ryan.decisions')) {
+        else if (key_lower.includes('ryandecisions')) {
             await chrome.tabGroups.update(group, {
               title: 'PROD',
               color: 'red',
+            });
+        } else if (key_lower.includes('ryantest')) {
+            await chrome.tabGroups.update(group, {
+              title: 'TEST',
+              color: 'blue',
+            });
+        } else if (key_lower.includes('access-stagingryan')) {
+            await chrome.tabGroups.update(group, {
+              title: 'DXP STAGE',
+              color: 'cyan',
             });
         } else {
             await chrome.tabGroups.update(group, {
@@ -93,6 +103,9 @@ async function sortTabs() {
                 //color: 'red',
               });
         }
+        chrome.tabGroups.update(group, {
+            collapsed: true,
+        })
         
     })
 }
