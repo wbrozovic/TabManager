@@ -1,4 +1,3 @@
-// Bold header text
 # **TabManager Chrome Extension**
 TabManager seeks to organize your tabs of the same website into groups. This is a work in progress that 
 essentially uses regex to extract the base of each tab's url and organizes the tabs accordingly.
